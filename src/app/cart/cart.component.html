@@ -1,0 +1,99 @@
+<div *ngIf="cartList.length; else emptyMessage" class="cart-container">
+  <div class="cart-panel">
+    <div class="cart-item" *ngFor="let item of cartList">
+      <img src="{{ item.url }}" alt="{{ item.name }}" />
+      <div class="cart-item-details">
+        <h4>{{ item.name }}</h4>
+        <p>{{ item.price | currency }}</p>
+        <label for="item-quantity">Amount:</label>
+        <input
+          (change)="getAmountValue(+item.id, $event)"
+          type="number"
+          min="0"
+          value="{{ item.option }}"
+        />
+        <button (click)="deleteItem(+item.id)" class="btn btn-primary">
+          Remove Product from Cart
+        </button>
+      </div>
+    </div>
+    <p>
+      <b>Total: {{ totalPrice | currency }}</b>
+    </p>
+  </div>
+
+  <div class="form-margin">
+    <form
+      #form="ngForm"
+      [formGroup]="myform"
+      (ngSubmit)="onSubmit(customerName.value, totalPrice)"
+    >
+      <label for="name">Full Name:</label>
+      <input
+        #customerName
+        [(ngModel)]="name"
+        (ngModelChange)="validateName(name)"
+        type="text"
+        placeholder="(minimum 3 Characters)"
+        formControlName="name"
+        required
+        minlength="3"
+      />
+      <div *ngIf="myform.controls.name.dirty || myform.controls.name.invalid">
+        <p *ngIf="myform.controls.name.errors?.['required']">
+          Please Enter your Name
+        </p>
+        <p *ngIf="myform.controls.name.errors?.['minlength']">
+          Please Enter at least 3 Characters
+        </p>
+        <p></p>
+      </div>
+      <label for="address">Address:</label>
+      <input
+        type="text"
+        placeholder="(minimum 6 Characters)"
+        formControlName="address"
+        required
+        minlength="6"
+      />
+      <div
+        *ngIf="myform.controls.address.dirty || myform.controls.address.invalid"
+      >
+        <p *ngIf="myform.controls.address.errors?.['required']">
+          Please Enter your Address
+        </p>
+        <p *ngIf="myform.controls.address.errors?.['minlength']">
+          Please Enter at least 6 Characters
+        </p>
+      </div>
+      <label for="card">Credit Card:</label>
+      <input
+        type="number"
+        placeholder="(16-digit number)"
+        formControlName="card"
+        required
+        min="0"
+        max="9999999999999999"
+      />
+      <div *ngIf="myform.controls.card.dirty || myform.controls.card.invalid">
+        <p *ngIf="myform.controls.card.errors?.['required']">
+          Please Enter your Card Number
+        </p>
+        <p *ngIf="myform.controls.card.errors?.['minlength']">
+          Please Enter at 16-digit number
+        </p>
+        <p *ngIf="myform.controls.card.errors?.['maxlength']">
+          Please Enter at 16-digit number
+        </p>
+      </div>
+      <p>We'll never share your Payment details with anyone else.</p>
+      <button class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+<ng-template #emptyMessage>
+  <div class="empty-cart-message">
+    <p>Your Cart is Empty!</p>
+  </div>
+</ng-template>

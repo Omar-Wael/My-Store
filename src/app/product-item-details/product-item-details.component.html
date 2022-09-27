@@ -1,0 +1,25 @@
+<div class="detail-container">
+  <img src="{{ product.url }}" alt="{{ product.name }}" />
+  <div class="detail-item">
+    <h3>{{ product.name }}</h3>
+    <p>{{ product.price }}</p>
+    <p>{{ product.description }}</p>
+    <select #itemAmount class="select-input">
+      <option
+        *ngFor="let amount of ProductAmount"
+        [ngValue]="amount"
+        [selected]="amount === 1"
+      >
+        {{ amount }}
+      </option>
+    </select>
+    <button
+      class="btn btn-primary"
+      (click)="addToCart(product, itemAmount.value)"
+    >
+      Add to Cart
+    </button>
+    <br />
+    <a class="back-link" routerLink="/">Back to Product List</a>
+  </div>
+</div>
