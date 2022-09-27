@@ -21,3 +21,4 @@ My Store is a single-page application built in Angular, that offers a dynamic ex
 
 1- On the same terminal, Run `ng serve` for a dev server.
 2- Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# My-Store
