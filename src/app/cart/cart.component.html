@@ -39,7 +39,7 @@
         required
         minlength="3"
       />
-      <div *ngIf="myform.controls.name.dirty || myform.controls.name.invalid">
+      <div *ngIf="myform.controls.name.touched || myform.controls.name.invalid">
         <p *ngIf="myform.controls.name.errors?.['required']">
           Please Enter your Name
         </p>
@@ -57,7 +57,9 @@
         minlength="6"
       />
       <div
-        *ngIf="myform.controls.address.dirty || myform.controls.address.invalid"
+        *ngIf="
+          myform.controls.address.touched || myform.controls.address.invalid
+        "
       >
         <p *ngIf="myform.controls.address.errors?.['required']">
           Please Enter your Address
@@ -75,7 +77,7 @@
         min="0"
         max="9999999999999999"
       />
-      <div *ngIf="myform.controls.card.dirty || myform.controls.card.invalid">
+      <div *ngIf="myform.controls.card.touched || myform.controls.card.invalid">
         <p *ngIf="myform.controls.card.errors?.['required']">
           Please Enter your Card Number
         </p>

@@ -60,6 +60,7 @@ export class CartComponent implements OnInit {
       (product) => +product.id === id
     );
     this.cartList.splice(productIndex, 1);
+    confirm('Do you want to delete this item?');
     return this.cartList;
   }
   clearCart(): void {
